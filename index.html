@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <title>Watson Virtual assistant</title>
+   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src=https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+ <style type="text/css">
+    html, body {
+      width:100%;
+      height:100%
+    
+      text-align:center;
+      background:#333 url('http://fc07.deviantart.net/fs70/f/2013/174/3/e/recycled_texture_background_by_sandeep_m-d6aeau9.jpg') center repeat;
+      overflow:hidden;
+     
+    }
+   .hd{
+   background:#fff center repeat;
+   }
+   .hds{
+   color:#000;
+   height:300px;
+   overflow:scroll;
+   }
+  </style>
+<header class="navbar navbar-static-top bs-docs-nav  hd" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      
+     
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#">Watson Virtual Chat  <i class="glyphicon glyphicon-comment"></i></a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+
+
+
+
+
+    <div class="container">
+
+   
+
+
+      <div class="row featurette">
+        <div class="col-md-10 col-md-offset-1">
+         
+          
+         
+          
+         <div class="panel panel-default">
+        <div class="panel-heading">
+       <h3 class="panel-title">Watson Virtual assistant &nbsp;<i class="glyphicon glyphicon-comment"></i></h3>
+       <h2> </h2>
+          </div>
+          <div class="panel-body text-justify">
+          <div class="hds">
+           <div id="book" class="text-center"> <img height="100" width="200"     src="https://24.media.tumblr.com/66b39eeb0ffc5881e7e89f4fae236a81/tumblr_n32sc1LBG01sfkf6ho1_500.gif"></div>
+          <p  id="navyman"></p>
+          <blockquote><small>Watson virtual chat uses corpus from travel and health. Try asking queries related to travel and health. For e.g. What to do in Ohio columbus? <br/> Built on node.js/socket.io/Watson QAAPI- Use modern browsers chrome/Firefox/IE9+</small></blockquote>
+          
+          </div>
+           <form id="message-form"  action="#" class="form-inline">
+          
+  <div class="form-group">
+    
+    <div class="col-sm-4">
+     <input type="hidden" class="form-control" id="nick" placeholder="Nick Name" value="You">
+     <textarea  required=true  id="message" rows="4" cols="76" placeholder="Type here..."> What to do in Ohio columbus?</textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-2">
+      <input type="submit" id="clickme" class="btn btn-success btn-sm" value="Ask Watson">
+    </div>
+  </div>
+          
+
+</form>
+         
+     </div>    
+  </div>
+  
+</div>
+         
+         
+  
+        
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script>
+var socket=io.connect('http://127.0.0.1:3000');
+var message=document.getElementById('message');
+$( "#book" ).hide();
+	
+	$(message.form).submit(function(){
+		//alert(message.value);
+		socket.emit('message',{text:message.value,nick:nick.value});
+		$( "#book" ).show();
+		return false;
+	});
+	
+	socket.on('push message',function(data){
+		
+		$('#navyman').after('<p class="text-justify"><b>'+ data.nick + ': </b>' +  data.qn +'</p><hr/>');
+		$('#navyman').after('<p class="text-justify"><b>Watson: </b>' +  data.results.formattedText +'</p>');
+		$( "#book" ).hide();
+	});
+
+	
+</script>
+
+              </div>
+  
+      </div>
+
+      
+
+
+
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+     
+        
+      </footer>
+
+    </div><!-- /.container -->
+
+
+
+
+
+
+</body>
+</html>
